@@ -35,11 +35,14 @@ class AdminController extends BaseController
         $braceletColor = $request->input('productBraceletColor');
         $description = $request->input('descImage');
         $category = $request->input('productCategory');
+
         $image = $request->file('productImage');//instanca fajla
         $tmp_path = $image->getPathName();
         $extension = $image->getClientOriginalExtension();
         $file_name = time() . '.' .$extension;
         $path = './img/'.$file_name;
+
+
         if($image->isValid()) {
             File::move($tmp_path, $path);
             $this->admin->insert($name, $price, $path, $description, $brand, $bracelet, $braceletColor, $category);
